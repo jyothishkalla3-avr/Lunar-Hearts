@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Shanthii ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rose-gold: #e5b3a3;
+            --deep-pink: #ff4d94;
+            --soft-blush: #ffafbd;
+            --gold: #ffd700;
+        }
+
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Poppins', sans-serif; overflow: hidden; background: #000; }
+
+        /* --- 1. ROMANTIC COUNTDOWN LAYER --- */
+        #countdown-layer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            /* Romantic Gradient Background */
+            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+            z-index: 2000;
+            transition: transform 1.5s cubic-bezier(0.65, 0, 0.35, 1), opacity 1s;
+        }
+
+        .timer-circle {
+            position: relative;
+            width: 250px; height: 250px;
+            display: flex; align-items: center; justify-content: center;
+            border: 4px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 77, 148, 0.3);
+        }
+
+        .timer-number {
+            font-size: 10rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 5px 15px rgba(214, 51, 132, 0.4);
+            z-index: 2001;
+        }
+
+        .timer-label {
+            position: absolute; top: -50px;
+            font-family: 'Dancing Script'; font-size: 2.5rem;
+            color: #d63384;
+        }
+
+        /* Moving Petals in Countdown */
+        .countdown-petal {
+            position: absolute; background: rgba(255, 255, 255, 0.5);
+            border-radius: 150% 0 150% 0; pointer-events: none;
+            animation: drift 5s linear infinite;
+        }
+
+        @keyframes drift {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        /* --- 2. MAIN BIRTHDAY CONTENT --- */
+        #main-site {
+            display: none; height: 100vh;
+            background: linear-gradient(rgba(26, 0, 51, 0.9), rgba(26, 0, 51, 0.9)), 
+                        url('https://images.unsplash.com/photo-1530103578275-21127a7c3f4a?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            text-align: center; color: white;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 3rem; margin-top: 10vh;
+            display: inline-block; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            animation: slideIn 1.5s ease-out;
+        }
+
+        @keyframes slideIn { from { transform: translateY(50px); opacity: 0; } }
+
+        .birthday-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem; color: var(--gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            margin: 0;
+        }
+
+        .birthday-text span { color: var(--deep-pink); }
+
+        /* --- 3. FLOATING LIGHT LAMPS (LANTERNS) --- */
+        .lantern {
+            position: absolute; bottom: -100px;
+            width: 45px; height: 70px;
+            background: rgba(255, 183, 77, 0.9);
+            border-radius: 8px 8px 4px 4px;
+            box-shadow: 0 0 40px 15px rgba(255, 140, 0, 0.5);
+            animation: floatUp 15s linear infinite;
+        }
+
+        .lantern::before {
+            content: ''; position: absolute; bottom: 10px; left: 50%;
+            transform: translateX(-50%); width: 15px; height: 15px;
+            background: white; border-radius: 50%; filter: blur(3px);
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(30deg); opacity: 0; }
+        }
+
+        .neon-btn {
+            text-decoration: none; color: white; padding: 15px 45px;
+            border: 2px solid var(--deep-pink); border-radius: 50px;
+            text-transform: uppercase; font-weight: 600;
+            display: inline-block; margin-top: 30px;
+            box-shadow: 0 0 15px var(--deep-pink); transition: 0.3s;
+        }
+        .neon-btn:hover { background: var(--deep-pink); box-shadow: 0 0 40px var(--deep-pink); }
+
+        .cake-box { margin: 30px auto; cursor: pointer; }
+        .flame { width: 12px; height: 20px; background: orange; border-radius: 50%; 
+                 margin: 0 auto; box-shadow: 0 0 10px orange; animation: flick 0.1s infinite; }
+        @keyframes flick { 0% { opacity: 0.8; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div id="countdown-layer">
+        <div class="timer-circle">
+            <div class="timer-label">Wait for it, My Love...</div>
+            <div class="timer-number" id="timer">6</div>
+        </div>
+        <script>
+            for(let i=0; i<15; i++) {
+                let p = document.createElement('div');
+                p.className = 'countdown-petal';
+                p.style.left = Math.random()*100+'vw';
+                p.style.top = '-10vh';
+                p.style.width = Math.random()*15+10+'px';
+                p.style.height = p.style.width;
+                p.style.animationDuration = Math.random()*3+3+'s';
+                p.style.animationDelay = Math.random()*5+'s';
+                document.getElementById('countdown-layer').appendChild(p);
+            }
+        </script>
+    </div>
+
+    <div id="main-site">
+        <div id="lantern-field"></div>
+        <div class="glass-card">
+            <h1 class="birthday-text">Happy 19th Birthday <br><span>Shanthii ❤️</span></h1>
+            
+            <div class="cake-box" onclick="extinguish()">
+                <div style="width: 14px; height: 40px; background: #e5b3a3; margin: 0 auto;">
+                    <div class="flame" id="flame"></div>
+                </div>
+                <p style="font-size: 0.9rem; margin-top: 10px;">Make a wish and blow the candle!</p>
+            </div>
+
+            <a href="sky.html" class="neon-btn">Open the Surprise ✨</a>
+        </div>
+    </div>
+
+    <script>
+        // COUNTDOWN SCRIPT
+        let count = 6;
+        const timer = document.getElementById('timer');
+        const overlay = document.getElementById('countdown-layer');
+        const mainSite = document.getElementById('main-site');
+
+        const countdown = setInterval(() => {
+            count--;
+            timer.innerText = count;
+
+            if (count === 0) {
+                clearInterval(countdown);
+                overlay.style.transform = "translateY(-100%)";
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    mainSite.style.display = 'block';
+                    generateLanterns();
+                }, 1000);
+            }
+        }, 1000);
+
+        // LANTERN GENERATOR
+        function generateLanterns() {
+            setInterval(() => {
+                const l = document.createElement('div');
+                l.className = 'lantern';
+                l.style.left = Math.random() * 100 + 'vw';
+                l.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                document.getElementById('lantern-field').appendChild(l);
+                setTimeout(() => l.remove(), 15000);
+            }, 800);
+        }
+
+        // CANDLE BLOW
+        function extinguish() {
+            document.getElementById('flame').style.display = 'none';
+            alert("Wishing you all the happiness in the world, Shanthii! 🎂✨");
+            // Heart Explosion
+            for(let i=0; i<30; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'fixed';
+                heart.style.left = '50%'; heart.style.top = '50%';
+                heart.style.color = '#ff4d94';
+                heart.style.fontSize = '2rem';
+                document.body.appendChild(heart);
+                heart.animate([
+                    { transform: 'translate(0,0)', opacity: 1 },
+                    { transform: `translate(${(Math.random()-0.5)*800}px, ${(Math.random()-0.5)*800}px)`, opacity: 0 }
+                ], { duration: 2000, easing: 'ease-out' });
+                setTimeout(() => heart.remove(), 2000);
+            }
+        }
+    </script>
+</body>
+</html>

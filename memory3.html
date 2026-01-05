@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forever Promise ♾️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap');
+
+       /* Update this section (Lines 10-21) */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Changed from height: 100vh to allow growth */
+    display: block;    /* Changed from flex to block for proper scrolling */
+    background: radial-gradient(circle at center, #1a0a2e 0%, #050505 100%);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    overflow-y: auto;  /* Changed from hidden to auto to enable scrolling */
+    overflow-x: hidden;
+    text-align: center;
+}
+
+/* Update this section (Lines 31-36) */
+.container {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 40px 20px; /* Added more padding for top and bottom */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Keeps the photo and text centered in the middle */
+    width: 100%;
+}
+
+        /* ✨ Twinkling Stars Background */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* 🖼️ The Polaroid Photo Frame */
+        .photo-card {
+            background: white;
+            padding: 15px 15px 60px 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(255, 77, 109, 0.3);
+            transform: rotate(-3deg);
+            transition: 0.5s ease-in-out;
+            cursor: pointer;
+            animation: reveal 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .photo-card:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 30px 60px rgba(255, 77, 109, 0.5);
+        }
+
+        .photo-card img {
+            width: 300px;
+            height: auto;
+            display: block;
+            border: 2px solid #f0f0f0;
+        }
+
+        @keyframes reveal {
+            from { opacity: 0; transform: scale(0.5) rotate(-20deg); filter: blur(10px); }
+            to { opacity: 1; transform: scale(1) rotate(-3deg); filter: blur(0); }
+        }
+
+        /* ✍️ Captions */
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #ffeb3b;
+            margin-top: 30px;
+            text-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+        }
+
+        .quote {
+            font-style: italic;
+            color: #ffafbd;
+            max-width: 400px;
+            margin: 10px auto;
+            opacity: 0;
+            animation: fadeIn 2s forwards 1s;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* 🔙 Navigation Button */
+        .back-btn {
+            margin-top: 40px;
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            transition: 0.3s;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            background: white;
+            color: black;
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="stars"></canvas>
+
+    <div class="container">
+        <div class="photo-card">
+            <img src="https://img.sanishtech.com/u/c65ae8b9bdef4aaf658481ce541f630f.jpg" alt="Memory 3">
+        </div>
+
+        <h1>Forever Promise ♾️</h1>
+        <p class="quote">"The stars were watching us that night, but they were never as bright as the light in your eyes."</p>
+        
+        <a href="memories.html" class="back-btn">← Return to Memories</a>
+    </div>
+
+    <script>
+        // 🌟 Interactive Stars Script
+        const canvas = document.getElementById('stars');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let starArray = [];
+        for (let i = 0; i < 150; i++) {
+            starArray.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2,
+                opacity: Math.random(),
+                speed: Math.random() * 0.02
+            });
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            starArray.forEach(star => {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+                ctx.fill();
+                
+                star.opacity += star.speed;
+                if (star.opacity > 1 || star.opacity < 0) star.speed = -star.speed;
+            });
+            requestAnimationFrame(drawStars);
+        }
+        drawStars();
+    </script>
+</body>
+</html>

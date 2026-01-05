@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Memory Challenge </title>
+    <style>
+       @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            /* 🌈 Animated Gradient Background */
+            background: linear-gradient(45deg, #2d0a1a, #050505, #4a0e2e, #050505);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 🧸 Large Animated Teddy Bears */
+        .teddy {
+            position: absolute;
+            font-size: 60px; /* Made them bigger */
+            z-index: 1;
+            animation: floatAndSway 10s ease-in-out infinite;
+            opacity: 0.3;
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px rgba(255, 133, 162, 0.5));
+        }
+
+        @keyframes floatAndSway {
+            0% { transform: translateY(110vh) translateX(0) rotate(0deg); }
+            50% { transform: translateY(50vh) translateX(100px) rotate(20deg); }
+            100% { transform: translateY(-20vh) translateX(-50px) rotate(-20deg); }
+        }
+
+        /* ✨ Sparkling Stars Background */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background-image: radial-gradient(#fff 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            animation: starsMove 100s linear infinite;
+        }
+
+        @keyframes starsMove {
+            from { transform: translateY(0); }
+            to { transform: translateY(-50%); }
+        }
+
+        /* 💌 Enhanced Glassmorphism Box */
+        .game-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 2px solid rgba(255, 133, 162, 0.4);
+            border-radius: 30px;
+            padding: 40px;
+            width: 85%;
+            max-width: 450px;
+            text-align: center;
+            z-index: 10;
+            box-shadow: 0 0 30px rgba(255, 77, 109, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        h1 { font-family: 'Dancing Script', cursive; color: #ff85a2; font-size: 2.5rem; text-shadow: 0 0 15px rgba(255, 77, 109, 0.6); }
+        #question-text { font-size: 1.2rem; font-weight: 400; color: #ffe0e6; }
+
+        .options { display: grid; gap: 15px; }
+        button {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 16px;
+            color: white;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s all ease;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        button:hover { 
+            background: #ff4d6d; 
+            border-color: #ff85a2;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.4);
+        }
+
+        #feedback { margin-top: 25px; font-size: 1.1rem; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
+        
+        /* ✨ Correct Answer Pulse */
+        .pulse-correct { animation: pulseGreen 0.6s ease-in-out; }
+        @keyframes pulseGreen {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); border-color: #00ff88; box-shadow: 0 0 40px #00ff88; }
+            100% { transform: scale(1); }
+        }
+
+        .shake-wrong { animation: shake 0.4s ease-in-out; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-15px); }
+            75% { transform: translateX(15px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="teddy-container"></div>
+
+    <div class="game-card" id="main-card">
+        <h1 id="question-header">Memory #1</h1>
+        <p id="question-text">Loading memory...</p>
+        
+        <div class="options" id="options-container"></div>
+        <div id="feedback"></div>
+    </div>
+
+    <script>
+        // Data from your handwritten notes
+        const quizData = [
+            {
+                question: "On our 1st meet (April 4th), what sweet treats did we have? ",
+                options: ["KitKat", "Dairy Milk Desserts", "5 Star", "Ice Cream"],
+                correct: "Dairy Milk Desserts"
+            },
+            {
+                question: "On our 2nd meet, I wore a Dark Blue chiques shirt. What happened for the first time? ",
+                options: ["We went to a movie", "First touch", "We danced", "I gave you a ring"],
+                correct: "First touch"
+            },
+            {
+                question: "On June 24th (6th meet), I wore a Red chiques shirt. What did you say about that day? ",
+                options: ["It was okay", "It was my best day", "It was too hot", "I forgot"],
+                correct: "It was my best day"
+            },
+            {
+                question: "During our 7th meet in August, how many '5 Star' chocolates did I give you? ",
+                options: ["One", "Three", "Five", "Two"],
+                correct: "Two"
+            },
+            {
+                question: "On August 24th, I wore a Sky Blue shirt. How long were we together that day? ",
+                options: ["Until 2:00", "Until 4:30", "Until 6:00", "Until 12:00"],
+                correct: "Until 4:30"
+            },
+            {
+                question: "On Oct 11th, we walked side-by-side for the first time. What was I wearing? ",
+                options: ["Black shirt", "White with gold leaf small chiques", "Red shirt", "Sky blue"],
+                correct: "White with gold leaf small chiques"
+            }
+        ];
+
+        let currentIdx = 0;
+        let attemptCount = 0; // Track wrong attempts for the current question
+
+        function loadQuestion() {
+            attemptCount = 0; 
+            const q = quizData[currentIdx];
+            document.getElementById("question-header").innerText = `Memory #${currentIdx + 1}`;
+            document.getElementById("question-text").innerText = q.question;
+            document.getElementById("feedback").innerText = "";
+            
+            const container = document.getElementById("options-container");
+            container.innerHTML = "";
+            
+            q.options.forEach(opt => {
+                const btn = document.createElement("button");
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(choice) {
+            const feedback = document.getElementById("feedback");
+            const card = document.getElementById("main-card");
+            const correct = quizData[currentIdx].correct;
+
+            if (choice === correct) {
+                // Correct Answer Logic
+                feedback.style.color = "#00ff88";
+                feedback.innerText = "Correct! You remember! ";
+                card.classList.add("pulse-correct");
+                
+                setTimeout(() => {
+                    card.classList.remove("pulse-correct");
+                    moveToNext();
+                }, 1600);
+            } else {
+                // Wrong Answer Logic
+                attemptCount++;
+                card.classList.add("shake-wrong");
+                setTimeout(() => card.classList.remove("shake-wrong"), 400);
+
+                if (attemptCount >= 2) {
+                    // Second Wrong Attempt: Show correct answer and move on
+                    feedback.style.color = "#ffbd03";
+                    feedback.innerText = `It was actually: ${correct} `;
+                    
+                    setTimeout(() => {
+                        moveToNext();
+                    }, 2500);
+                } else {
+                    // First Wrong Attempt
+                    feedback.style.color = "#ff4d6d";
+                    feedback.innerText = "No baby, try again... ";
+                }
+            }
+        }
+
+        function moveToNext() {
+            currentIdx++;
+            if (currentIdx < quizData.length) {
+                loadQuestion();
+            } else {
+                showFinish();
+            }
+        }
+
+        function showFinish() {
+            const card = document.querySelector(".game-card");
+            card.innerHTML = `
+                <h1>Perfect Score!</h1>
+                <p>You remember our journey as perfectly as I do. Now, I have something special to tell you...</p>
+                <button onclick="window.location.href='proposal.html'" style="width:100%; background:#ff4d6d; border:none; padding:15px; font-weight:bold;">Open My Heart ❤️</button>
+            `;
+        }
+
+        // Create Floating Teddies
+        const tContainer = document.getElementById('teddy-container');
+        for (let i = 0; i < 15; i++) {
+            const teddy = document.createElement('div');
+            teddy.className = 'teddy';
+            teddy.innerText = '🧸';
+            teddy.style.left = Math.random() * 100 + 'vw';
+            teddy.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            teddy.style.animationDelay = Math.random() * 5 + 's';
+            tContainer.appendChild(teddy);
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>

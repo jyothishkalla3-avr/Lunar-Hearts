@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Forever - Shanthii ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            /* Lite Pink Romantic Gradient Background */
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* 🌸 Cherry Blossom Canvas Background */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* 💌 Glassmorphism Content Card */
+        .finale-card {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.45); 
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.2);
+            max-width: 85%;
+            width: 550px;
+            animation: fadeIn 2.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #d63384; 
+            font-size: 3rem;
+            margin: 0 0 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .quote {
+            font-size: 1.15rem;
+            color: #444;
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .wish {
+            font-weight: 600;
+            color: #ff4d6d;
+            font-size: 1.4rem;
+            display: block;
+            margin-top: 10px;
+            text-shadow: 0 0 10px rgba(255, 77, 109, 0.2);
+        }
+
+        .missing-you {
+            font-size: 1.05rem;
+            color: #880e4f;
+            margin-top: 20px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        /* 🧸 Teddy Bear Styling */
+        .teddy-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 20;
+            font-size: 80px; /* Size of the teddy */
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+            animation: wave 3s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(10deg) scale(1.05); }
+        }
+
+        .heart-float {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            font-size: 25px;
+            animation: floatHeart 2s infinite;
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-40px) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="flowerCanvas"></canvas>
+
+    <div class="finale-card">
+        <h1>Forever & Always</h1>
+        
+        <p class="quote">
+            "Distance only makes the heart grow fonder, but every second away from you feels like a lifetime. You are the piece of me that’s always missing when we’re apart, and the reason I smile when I close my eyes."
+        </p>
+
+        <span class="wish">Happiest 19th Birthday, My Everything! </span>
+        
+        <p class="missing-you">I miss you more than words can tell... see you soon. </p>
+    </div>
+
+    <div class="teddy-container">
+        <span class="heart-float">❤️</span>
+        🧸
+    </div>
+
+    <script>
+        const canvas = document.getElementById("flowerCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let petals = [];
+
+        class Petal {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height - canvas.height;
+                this.size = Math.random() * 8 + 4;
+                this.speed = Math.random() * 1.2 + 0.8;
+                this.angle = Math.random() * 360;
+                this.spin = Math.random() * 0.04 - 0.02;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.bezierCurveTo(-this.size, -this.size, -this.size, this.size, 0, this.size);
+                ctx.bezierCurveTo(this.size, this.size, this.size, -this.size, 0, 0);
+                ctx.fillStyle = "rgba(255, 192, 203, 0.8)"; 
+                ctx.fill();
+                ctx.restore();
+            }
+
+            update() {
+                this.y += this.speed;
+                this.x += Math.sin(this.y / 80) * 0.5;
+                this.angle += this.spin;
+                if (this.y > canvas.height) {
+                    this.y = -20;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < 60; i++) {
+                petals.push(new Petal());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            petals.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener("resize", () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        init();
+        animate();
+    </script>
+</body>
+</html>

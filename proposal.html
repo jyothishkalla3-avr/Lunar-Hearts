@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Shanthii! ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at center, #1a0a2e 0%, #050505 100%);
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main-card {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            padding: 60px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            box-shadow: 0 0 60px rgba(255, 77, 109, 0.2);
+            animation: float 4s ease-in-out infinite;
+            max-width: 500px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #fff;
+            margin: 0;
+            text-shadow: 0 0 20px #ff4d6d;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            color: #ffafbd;
+            margin: 20px 0;
+            letter-spacing: 1px;
+        }
+
+        .proposal-text {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-top: 30px;
+            font-weight: 600;
+        }
+
+        .buttons {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 15px 45px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: 0.4s;
+            font-weight: bold;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .yes-btn {
+            background: #ff4d6d;
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 77, 109, 0.6);
+        }
+
+        .no-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ddd;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1000;
+        }
+
+        #finaleLink {
+            display: none;
+            margin-top: 30px;
+            color: #ffeb3b;
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 2px solid #ffeb3b;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-card">
+        <h1>Happy Birthday, Shanthii!</h1>
+        <p class="message">You are the most precious person in my world.</p>
+        <div class="proposal-text">Will you stay mine forever?</div>
+
+        <div class="buttons" id="buttonGroup">
+            <button class="btn yes-btn" onclick="sayYes()">YES, FOREVER!</button>
+            <button class="btn no-btn" id="noBtn" onmouseover="moveNo()" onclick="moveNo()">No</button>
+        </div>
+
+        <a href="finale.html" id="finaleLink">Continue Our Forever →</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        // 1. Corrected Runaway No Button Logic
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth - 100);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight - 100);
+
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            
+            const randomRotate = (Math.random() * 30) - 15; 
+            btn.style.transform = `rotate(${randomRotate}deg)`;
+        }
+
+        // 2. Corrected Celebration Action
+        function sayYes() {
+            const buttonGroup = document.getElementById('buttonGroup');
+            const finaleLink = document.getElementById('finaleLink');
+            const title = document.querySelector('h1');
+            const msg = document.querySelector('.message');
+            const proposal = document.querySelector('.proposal-text');
+
+            // Hide buttons and show the link
+            buttonGroup.style.display = 'none';
+            title.innerHTML = "I Love You! 💖";
+            msg.innerHTML = "You've made me the happiest person alive.";
+            proposal.innerHTML = "Forever Starts Today.";
+            
+            // This displays the hidden finale.html link
+            finaleLink.style.display = 'inline-block';
+
+            // Confetti Burst
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff4d6d', '#ffafbd', '#ffffff']
+            });
+        }
+    </script>
+</body>
+</html>

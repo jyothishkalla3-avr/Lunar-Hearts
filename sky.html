@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Night Sky - Shanthii</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: radial-gradient(circle at bottom, #1B2735 0%, #090A0F 100%);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .moon {
+            position: absolute;
+            top: 50px;
+            right: 80px;
+            width: 100px;
+            height: 100px;
+            background: #FFFDF2;
+            border-radius: 50%;
+            box-shadow: 0 0 40px #FFFDF2;
+            cursor: pointer;
+            z-index: 5;
+        }
+
+        .instruction {
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+            z-index: 10;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .neon-btn {
+            margin-top: 30px;
+            padding: 15px 30px;
+            border: 2px solid #ff4d94;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            z-index: 10;
+            box-shadow: 0 0 15px #ff4d94;
+        }
+
+        /* Fixed Shooting Star Style */
+        .shooting-star {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(-45deg, white, rgba(0, 0, 255, 0));
+            filter: drop-shadow(0 0 6px white);
+            z-index: 2;
+        }
+    </style>
+</head>
+<body onclick="makeStar(event)">
+
+    <div class="moon" onclick="alert('You light up my darkest nights, Shanthii! ❤️')"></div>
+    
+    <div class="instruction">
+        <h2>Click anywhere on the sky...</h2>
+        <p>Every shooting star is a wish for your happiness.</p>
+    </div>
+
+    <a href="memories.html" class="neon-btn">Our Memories 💞</a>
+
+    <script>
+        function makeStar(e) {
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            
+            // Starting point
+            star.style.left = e.clientX + 'px';
+            star.style.top = e.clientY + 'px';
+            star.style.width = '100px';
+
+            document.body.appendChild(star);
+
+            // Animation: Move fast and fade out
+            const animation = star.animate([
+                { transform: 'translateX(0) translateY(0) rotate(-45deg)', opacity: 1 },
+                { transform: 'translateX(400px) translateY(400px) rotate(-45deg)', opacity: 0 }
+            ], {
+                duration: 800,
+                easing: 'ease-in'
+            });
+
+            animation.onfinish = () => star.remove();
+        }
+        
+        // Add random twinkling stars in background
+        for(let i=0; i<100; i++) {
+            let s = document.createElement('div');
+            s.style.position = 'absolute';
+            s.style.width = Math.random() * 3 + 'px';
+            s.style.height = s.style.width;
+            s.style.background = 'white';
+            s.style.left = Math.random() * 100 + 'vw';
+            s.style.top = Math.random() * 100 + 'vh';
+            s.style.borderRadius = '50%';
+            s.style.opacity = Math.random();
+            document.body.appendChild(s);
+        }
+    </script>
+</body>
+</html>
